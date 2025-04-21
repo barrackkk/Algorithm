@@ -3,9 +3,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -17,49 +15,27 @@ public class Main {
         StringTokenizer st;
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int n = Integer.parseInt(br.readLine());
-        List<Member> list = new ArrayList<>();
-        int cnt = 0;
+        String[][] str = new String[n][2];
+
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
-            list.add(new Member(Integer.parseInt(st.nextToken()), st.nextToken(), cnt++));
+            str[i][0] = (st.nextToken());
+            str[i][1] = (st.nextToken());
         }
+        br.close();
 
-        Collections.sort(list, (e1, e2) -> {
-            if (e1.getAge() == e2.getAge()) {
-                return e1.getCnt() - e2.getCnt();
-            } else {
-                return e1.getAge() - e2.getAge();
-            }
+        Arrays.sort(str, (e1, e2) -> {
+            int a = Integer.parseInt(e1[0]);
+            int b = Integer.parseInt(e2[0]);
+            return Integer.parseInt(e1[0]) - Integer.parseInt(e2[0]);
         });
-        for (Member member : list) {
-            System.out.println(member.getAge() + " " + member.getName());
+        
+        for (int i = 0; i < n; i++) {
+            bw.write(str[i][0] + " " + str[i][1] + "\n");
         }
-
+        bw.flush();
+        bw.close();
     }
 
-
-    static class Member {
-        int age;
-        String name;
-        int cnt;
-
-        public Member(int age, String name, int cnt) {
-            this.age = age;
-            this.name = name;
-            this.cnt = cnt;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public int getCnt() {
-            return cnt;
-        }
-    }
 
 }
