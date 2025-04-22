@@ -19,7 +19,8 @@ public class Main {
                 set.add(str.substring(i, j));
             }
         }
+        sb.append(set.size());
 
-        System.out.println(set.size());
+        System.out.println(sb);
     }
 }
