@@ -7,12 +7,14 @@ import java.util.StringTokenizer;
 
 public class Main {
 
+    static StringBuilder sb = new StringBuilder();
+
     public static void recursive(int N, int M, List<Integer> lists, int current) {
         if (M == current) {
             for (int i = 0; i < lists.size(); i++) {
-                System.out.print(lists.get(i) + " ");
+                sb.append(lists.get(i)).append(" ");
             }
-            System.out.println();
+            sb.append("\n");
             return;
         }
 
@@ -23,13 +25,11 @@ public class Main {
             lists.add(i);
             recursive(N, M, lists, current + 1);
             lists.remove(lists.size() - 1);
-
         }
     }
 
-
     public static void main(String[] args) throws IOException {
-        StringBuilder sb = new StringBuilder();
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
@@ -37,6 +37,8 @@ public class Main {
         int M = Integer.parseInt(st.nextToken());
 
         recursive(N, M, new ArrayList<>(), 0);
+
+        System.out.println(sb);
 
 
     }
