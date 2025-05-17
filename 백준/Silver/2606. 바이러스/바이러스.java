@@ -32,7 +32,11 @@ public class Main {
             graph.get(b).add(a);
         }
 
-        dfs(1);
+        for (int i = 1; i <= n; i++) {
+            if (!visited[i]) {
+                dfs(1);
+            }
+        }
         System.out.println(cnt);
     }
 
