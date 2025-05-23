@@ -2,24 +2,23 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Stack;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-
-        int n = Integer.parseInt(br.readLine());
-        int sum = 0;
+        StringTokenizer st;
         Stack<Integer> stk = new Stack<>();
-        for (int i = 0; i < n; i++) {
+        int k = Integer.parseInt(br.readLine());
+        for (int i = 0; i < k; i++) {
             int a = Integer.parseInt(br.readLine());
-            if (a == 0) {
-                stk.pop();
-            } else {
+            if (a != 0) {
                 stk.push(a);
+            } else {
+                stk.pop();
             }
         }
+        int sum = 0;
         if (stk.empty()) {
             System.out.println("0");
             return;
@@ -29,7 +28,6 @@ public class Main {
                 sum += i;
             }
         }
-        sb.append(sum);
-        System.out.println(sb);
+        System.out.println(sum);
     }
 }
