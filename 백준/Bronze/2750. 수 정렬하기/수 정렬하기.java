@@ -6,19 +6,22 @@ import java.util.StringTokenizer;
 
 public class Main {
 
+    static int N, M;
+    static int[] arr;
+    static int min = Integer.MAX_VALUE;
+
+
     public static void main(String[] args) throws IOException {
-
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
-        int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int[] arr = new int[N];
+        N = Integer.parseInt(st.nextToken());
+        arr = new int[N];
 
         for (int i = 0; i < N; i++) {
-            st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            arr[i] = a;
+            arr[i] = Integer.parseInt(br.readLine());
         }
+
         Arrays.sort(arr);
         for (int i : arr) {
             System.out.println(i);
