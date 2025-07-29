@@ -5,29 +5,30 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Main {
+
     public static void main(String[] args) throws IOException {
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int N = Integer.parseInt(st.nextToken());
         Stack<Integer> stk = new Stack<>();
-        int k = Integer.parseInt(br.readLine());
-        for (int i = 0; i < k; i++) {
-            int a = Integer.parseInt(br.readLine());
-            if (a != 0) {
-                stk.push(a);
+
+        for (int i = 0; i < N; i++) {
+            int number = Integer.parseInt(br.readLine());
+            if (number != 0) {
+                stk.push(number);
             } else {
                 stk.pop();
             }
         }
-        int sum = 0;
-        if (stk.empty()) {
-            System.out.println("0");
-            return;
 
-        } else {
-            for (Integer i : stk) {
-                sum += i;
-            }
+        int sum = 0;
+        for (Integer i : stk) {
+            sum += i;
         }
+
         System.out.println(sum);
+
     }
 }
