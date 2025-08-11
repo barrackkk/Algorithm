@@ -3,19 +3,23 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
+
+
+    static int[] visit = new int[26];
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String s = br.readLine();
-
-        int[] arr = new int[26];
-        for (int i = 0; i < s.length(); i++) {
-            int a = s.charAt(i) - '0' - 49;
-            arr[a]++;
+//        StringTokenizer st = new StringTokenizer(br.readLine());
+        String str = br.readLine();
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            visit[c - 'a']++;
         }
 
-        for (int i : arr) {
-            System.out.printf(i + " ");
-
+        for (int i : visit) {
+            System.out.print(i + " ");
         }
     }
+
+
 }
