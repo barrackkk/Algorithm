@@ -2,41 +2,40 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.StringTokenizer;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
-        int[] arr = new int[9];
-        int sum = 0;
-        for (int i = 0; i < 9; i++) {
-            arr[i] = Integer.parseInt(br.readLine());
-            sum += arr[i];
-        }
+//        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        Arrays.sort(arr);
+        int sum = 0;
+        int[] arr = new int[9];
+        for (int i = 0; i < 9; i++) {
+            int num = Integer.parseInt(br.readLine());
+            arr[i] = num;
+            sum += num;
+        }
         int a = 0;
         int b = 0;
+        Arrays.sort(arr);
         for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (i == j) {
-                    continue;
-                }
+            for (int j = i + 1; j < 9; j++) {
                 if (sum - arr[i] - arr[j] == 100) {
-                    a = arr[i];
-                    b = arr[j];
+                    a = i;
+                    b = j;
+                    break;
                 }
             }
         }
+        arr[a] = Integer.MAX_VALUE;
+        arr[b] = Integer.MAX_VALUE;
 
-        for (int i : arr) {
-            if (i == a || i == b) {
-                continue;
-            }
-            System.out.println(i);
+        Arrays.sort(arr);
+        for (int i = 0; i < 7; i++) {
+            System.out.println(arr[i]);
         }
     }
+
 
 }
