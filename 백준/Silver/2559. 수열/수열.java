@@ -1,35 +1,31 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class Main {
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
-        int a = Integer.parseInt(st.nextToken());
-        int b = Integer.parseInt(st.nextToken());
-
-        List<Integer> arr = new ArrayList<>();
-
+        int[] arr = new int[N];
         st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < a; i++) {
-            int num = Integer.parseInt(st.nextToken());
-            arr.add(num);
+        for (int i = 0; i < N; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
         }
 
         int sum = 0;
-        for (int i = 0; i < b; i++) {
-            sum += arr.get(i);
+        for (int i = 0; i < M; i++) {
+            sum += arr[i];
         }
-
         int max = sum;
-        for (int i = b; i < a; i++) {
-            sum = sum - arr.get(i - b) + arr.get(i);
-            max = Integer.max(max, sum);
+
+        for (int i = M; i < N; i++) {
+            sum += arr[i] - arr[i - M]; 
+            max = Math.max(max, sum);
         }
 
         System.out.println(max);
