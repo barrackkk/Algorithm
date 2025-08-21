@@ -2,55 +2,36 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Main {
-
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
 
         Map<String, Integer> map = new HashMap<>();
-
-        String[] arr = new String[N];
+        int max = 0;
         for (int i = 0; i < N; i++) {
             String string = br.readLine();
-            arr[i] = string;
-            map.put(arr[i], 0);
-        }
+            map.put(string, map.getOrDefault(string, 0) + 1);
 
-        Arrays.sort(arr);
-
-        for (int i = 0; i < N; i++) {
-            int cnt = 0;
-            if (map.get(arr[i]) == 0) {
-                for (int j = 0; j < N; j++) {
-                    if (arr[i].equals(arr[j])) {
-                        cnt++;
-                    }
-                }
-                map.replace(arr[i], cnt);
-            }
-        }
-
-        int max = Integer.MIN_VALUE;
-        for (Integer value : map.values()) {
-            max = Math.max(max, value);
+            max = Math.max(max, map.get(string));
         }
 
         List<String> answer = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            if (entry.getValue() == max) {
+        for (Entry<String, Integer> entry : map.entrySet()) {
+            if (max == entry.getValue()) {
                 answer.add(entry.getKey());
             }
         }
-
         Collections.sort(answer);
+
         System.out.println(answer.get(0));
+
+
     }
 }
