@@ -4,38 +4,36 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class Main {
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int sum = 0;
         int[] arr = new int[9];
+        int sum = 0;
+
         for (int i = 0; i < 9; i++) {
-            int num = Integer.parseInt(br.readLine());
-            arr[i] = num;
-            sum += num;
+            arr[i] = Integer.parseInt(br.readLine());
+            sum += arr[i];
         }
-        int a = 0;
-        int b = 0;
+
         Arrays.sort(arr);
+        boolean found = false;
+
         for (int i = 0; i < 9; i++) {
             for (int j = i + 1; j < 9; j++) {
                 if (sum - arr[i] - arr[j] == 100) {
-                    a = i;
-                    b = j;
+                    arr[i] = arr[j] = Integer.MAX_VALUE;
+                    found = true;
                     break;
                 }
             }
+            if (found) {
+                break;
+            }
         }
-        arr[a] = Integer.MAX_VALUE;
-        arr[b] = Integer.MAX_VALUE;
 
         Arrays.sort(arr);
         for (int i = 0; i < 7; i++) {
             System.out.println(arr[i]);
         }
     }
-
-
 }
