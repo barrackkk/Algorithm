@@ -1,46 +1,36 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
+        int N = Integer.parseInt(br.readLine());
 
-        int n = Integer.parseInt(br.readLine());
-        String s = br.readLine();
-        String[] a = s.split("\\*");
+        String fileName = br.readLine();
+        int idx = fileName.indexOf("*");
 
-        for (int i = 0; i < n; i++) {
-            String s1 = br.readLine();
+        String first = fileName.substring(0, idx);
+        String last = fileName.substring(idx + 1);
 
-            boolean tf = true;
+        for (int i = 0; i < N; i++) {
+            String line = br.readLine();
 
-            if (s1.length() < a[0].length() + a[1].length()) {
-                tf = false;
-            } else {
-                for (int j = 0; j < a[0].length(); j++) {
-                    if (s1.charAt(j) != a[0].charAt(j)) {
-                        tf = false;
-                        break;
-                    }
-                }
-
-                for (int k = 0; k < a[1].length(); k++) {
-                    int idx = s1.length() - a[1].length() + k;
-                    if (s1.charAt(idx) != a[1].charAt(k)) {
-                        tf = false;
-                        break;
-                    }
-                }
+            if (line.length() < first.length() + last.length()) {
+                sb.append("NE\n");
+                continue;
             }
-
+            
+            boolean tf = line.startsWith(first) && line.endsWith(last);
             if (tf) {
-                System.out.println("DA");
+                sb.append("DA\n");
             } else {
-                System.out.println("NE");
+                sb.append("NE\n");
             }
         }
+
+        System.out.println(sb);
+
     }
 }
