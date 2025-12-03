@@ -8,30 +8,30 @@ import java.util.StringTokenizer;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-
-        Map<String, Integer> map1 = new HashMap<>();
-        Map<Integer, String> map2 = new HashMap<>();
-
-        for (int i = 1; i <= n; i++) {
+        Map<Integer, String> indexToName = new HashMap<>();
+        Map<String, Integer> nameToIndex = new HashMap<>();
+        for (int i = 1; i <= N; i++) {
             String name = br.readLine();
-            map1.put(name, i);
-            map2.put(i, name);
+            indexToName.put(i, name);
+            nameToIndex.put(name, i);
         }
 
-        for (int i = 0; i < m; i++) {
-            String s = br.readLine();
+        for (int i = 0; i < M; i++) {
+            String line = br.readLine();
 
             try {
-                int num = Integer.parseInt(s);
-                System.out.println(map2.get(num));
+                int numbering = Integer.parseInt(line);
+                sb.append(indexToName.get(numbering) + "\n");
             } catch (NumberFormatException e) {
-                System.out.println(map1.get(s));
+                sb.append(nameToIndex.get(line) + "\n");
             }
-        }
 
+        }
+        System.out.print(sb);
     }
 }
