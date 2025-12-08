@@ -4,27 +4,37 @@ import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+
         int N = Integer.parseInt(br.readLine());
-        int ans = 0;
+        int result = 0;
 
-        for (int t = 0; t < N; t++) {
-            String s = br.readLine();
-            Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < N; i++) {
+            Stack<Character> stk = new Stack<>();
+            String line = br.readLine();
 
-            for (int i = 0; i < s.length(); i++) {
-                char c = s.charAt(i);
-                if (!stack.isEmpty() && stack.peek() == c) {
-                    stack.pop();
-                } else {
-                    stack.push(c);
+            for (int j = 0; j < line.length(); j++) {
+                char c = line.charAt(j);
+
+                if (!stk.isEmpty() && c == stk.peek()) {
+                    stk.pop();
+                    continue;
                 }
+
+                stk.push(c);
+
             }
-            if (stack.isEmpty()) {
-                ans++;
+
+            if (stk.isEmpty()) {
+                result++;
             }
         }
 
-        System.out.println(ans);
+        sb.append(result);
+        System.out.println(sb);
+
+
     }
 }
