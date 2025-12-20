@@ -1,57 +1,59 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Stack;
 
 public class Main {
+    static StringBuilder sb = new StringBuilder();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
-            String str = br.readLine();
-            if (str.equals("end")) {
-                break;
+            String line = br.readLine();
+            Stack<Character> stk = new Stack<>();
+
+            if (line.equals("end")) {
+                System.out.println(sb);
+                return;
             }
 
-            boolean hasaeiou = false;
-            int aeioucnt = 0;
-            int notaeioucnt = 0;
-            boolean tf = true;
+            Boolean mo = false;
+            Boolean determine = false;
+            int moCnt = 0;
+            int jaCnt = 0;
 
-            char prev = 0;
-
-            for (int i = 0; i < str.length(); i++) {
-                char c = str.charAt(i);
-
-                boolean isVowel = (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u');
-
-                if (isVowel) {
-                    hasaeiou = true;
-                    aeioucnt++;
-                    notaeioucnt = 0;
-                } else {
-                    notaeioucnt++;
-                    aeioucnt = 0;
-                }
-
-                if (aeioucnt == 3 || notaeioucnt == 3) {
-                    tf = false;
-                    break;
-                }
-                if (i > 0 && c == prev) {
-                    if (!(prev == 'e' || prev == 'o')) {
-                        tf = false;
+            for (int i = 0; i < line.length(); i++) {
+                char c = line.charAt(i);
+                if (c != 'e' && c != 'o') {
+                    if (!stk.isEmpty() && stk.peek() == c) {
+                        determine = true;
                         break;
                     }
                 }
 
-                prev = c;
+                stk.push(c);
+                if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+                    mo = true;
+                    moCnt++;
+                    jaCnt = 0;
+                } else {
+                    moCnt = 0;
+                    jaCnt++;
+                }
+
+                if (moCnt == 3 || jaCnt == 3) {
+                    determine = true;
+                    break;
+                }
             }
 
-            if (tf && hasaeiou) {
-                System.out.println("<" + str + "> is acceptable.");
-            } else {
-                System.out.println("<" + str + "> is not acceptable.");
+            if (determine || !mo) {
+                sb.append("<" + line + ">" + " is not acceptable.\n");
+            }
+
+            if (!determine && mo) {
+                sb.append("<" + line + ">" + " is acceptable.\n");
             }
         }
     }
