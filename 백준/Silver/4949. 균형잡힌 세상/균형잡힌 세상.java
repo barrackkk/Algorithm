@@ -1,52 +1,55 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Stack;
-import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
         StringBuilder sb = new StringBuilder();
-        String line = "";
         while (true) {
-            line = br.readLine();
+            String line = br.readLine();
             if (line.equals(".")) {
-                break;
+                System.out.println(sb);
+                return;
             }
-            Stack<Character> stk1 = new Stack<>();
+            Stack<Character> stk = new Stack<>();
+
             for (int i = 0; i < line.length(); i++) {
                 char c = line.charAt(i);
+
                 if (c == '(') {
-                    stk1.push(c);
+                    stk.push(c);
                 }
                 if (c == '[') {
-                    stk1.push(c);
+                    stk.push(c);
                 }
 
                 if (c == ')') {
-                    if (!stk1.isEmpty() && stk1.peek() == '(') {
-                        stk1.pop();
+                    if (!stk.isEmpty() && stk.peek() == '(') {
+                        stk.pop();
                     } else {
-                        stk1.push(c);
+                        stk.push(c);
                     }
+
                 }
 
                 if (c == ']') {
-                    if (!stk1.isEmpty() && stk1.peek() == '[') {
-                        stk1.pop();
+                    if (!stk.isEmpty() && stk.peek() == '[') {
+                        stk.pop();
                     } else {
-                        stk1.push(c);
+                        stk.push(c);
                     }
+
                 }
             }
-            if (stk1.isEmpty()) {
+
+            if (stk.isEmpty()) {
                 sb.append("yes\n");
             } else {
                 sb.append("no\n");
             }
         }
-
-        System.out.println(sb);
     }
 }
